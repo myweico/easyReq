@@ -1,0 +1,8 @@
+{
+  "name": "easy-req",
+  "version": "1.0.0",
+  "description": "A tool to generate request file and interface file of request depends on the swagger",
+  "main": "dist/easy-req.js",
+  "author": "myweico@qq.com",
+  "license": "MIT"
+}
