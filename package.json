@@ -4,5 +4,11 @@
   "description": "A tool to generate request file and interface file of request depends on the swagger",
   "main": "dist/easy-req.js",
   "author": "myweico@qq.com",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "typescript": "^4.4.2"
+  }
 }
