@@ -5,10 +5,21 @@
   "main": "dist/easy-req.js",
   "author": "myweico@qq.com",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/myweico/easyReq"
+  },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "build:watch": "tsc --watch"
+  },
+  "bin": {
+    "easyreq": "./bin/www"
   },
   "dependencies": {
+    "commander": "^8.1.0",
     "typescript": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.10"
   }
 }
