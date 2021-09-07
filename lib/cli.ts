@@ -1,7 +1,7 @@
 import { Command } from 'commander'
 import { VERSION } from './constant'
+import { init, generate } from './commands'
 
-const CONFIG = require('../package.json')
 const program = new Command()
 
 interface commandConfig {
@@ -11,20 +11,8 @@ interface commandConfig {
 }
 
 const commandMap: Record<string, commandConfig> = {
-  init: {
-    description: 'init the easy request config',
-    usage: 'easyreq init',
-    action: (...args) => {
-      console.log('test', args[1].name())
-    }
-  },
-  generate: {
-    description: 'generate file depends on the config',
-    usage: 'easyreq generate',
-    action: (...args) => {
-      console.log('arguments', args)
-    }
-  }
+  init,
+  generate
 }
 
 Object.keys(commandMap).forEach((command) => {
