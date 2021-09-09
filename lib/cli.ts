@@ -1,3 +1,8 @@
+import path from 'path'
+import alias from 'module-alias'
+// 设置路径别名
+alias(path.resolve(__dirname, '../'))
+
 import { Command } from 'commander'
 import { VERSION } from './constant'
 import { init, generate } from './commands'

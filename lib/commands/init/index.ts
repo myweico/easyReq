@@ -1,5 +1,5 @@
 import fs from 'fs'
-import Config from '../../config'
+import Config from '@/config'
 
 export default {
   description: 'init the easy request config',
