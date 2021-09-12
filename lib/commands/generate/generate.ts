@@ -2,7 +2,7 @@ import template from 'art-template'
 import path from 'path'
 import fs from 'fs'
 
-export default (schema: any, config) => {
+export default (schema: any, config: any) => {
   console.log('in generate')
   const str = template(
     path.resolve(__dirname, '../../templates/api.art'),

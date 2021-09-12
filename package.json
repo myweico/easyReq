@@ -9,8 +9,12 @@
     "url": "https://github.com/myweico/easyReq"
   },
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch"
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 lib/templates/* dist/lib/",
+    "build": "npm run clean && tsc",
+    "build:watch": "npm run clean && tsc --watch",
+    "postbuild": "npm run copy-files",
+    "postbuild:watch": "npm run copy-files"
   },
   "bin": {
     "easyreq": "./bin/www"
@@ -26,7 +30,9 @@
   "devDependencies": {
     "@types/inquirer": "^8.1.1",
     "@types/module-alias": "^2.0.1",
-    "@types/node": "^16.7.10"
+    "@types/node": "^16.7.10",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2"
   },
   "_moduleAliases": {
     "@": "./lib"
