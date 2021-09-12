@@ -1,7 +1,8 @@
 import fs from 'fs'
 import is from '@/utils/is'
 import Config from '@/config'
-import axiso from 'axios'
+import axios from 'axios'
+import generateFile from './generate'
 
 export default {
   description: 'generate file depends on the config',
@@ -15,7 +16,7 @@ export default {
       let swaggerSchema
       // 判断 swagger 是需要从网络获取还是本地生成
       if (is.httpUrl(swaggerUrl)) {
-        const swaggerSchemaRes = await axiso.get(swaggerUrl)
+        const swaggerSchemaRes = await axios.get(swaggerUrl)
         swaggerSchema = swaggerSchemaRes.data
         console.log('swagger from axios', swaggerSchema)
       } else {
@@ -25,6 +26,7 @@ export default {
         console.log('swagger from file: ', swaggerSchema)
       }
 
+      generateFile(swaggerSchema, reqConfig)
       // 获取到配置文件后，根据配置文件生成模板
     } catch (err) {
       console.error(err)
