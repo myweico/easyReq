@@ -7,7 +7,6 @@ export const writeFileSync = (
   options?: WriteFileOptions
 ) => {
   const dirname = path.dirname(filepath)
-  console.log(dirname)
   fs.mkdirSync(dirname, { recursive: true })
   fs.writeFileSync(filepath, data, options)
 }

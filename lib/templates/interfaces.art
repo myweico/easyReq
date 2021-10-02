@@ -1,0 +1,3 @@
+declare namesapce {{ namespace }} {
+	{{set schema = data.schema}}
+}
