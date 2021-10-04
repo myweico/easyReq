@@ -2,6 +2,7 @@ import template from 'art-template'
 import path from 'path'
 import { writeFileSync } from '@/utils/file'
 import { schema2InterfaceData } from '@/utils/transform'
+import prettier from 'prettier'
 
 export const generateApisFile = ({
   schema,
@@ -33,9 +34,15 @@ export const generateInterfacesFile = ({
 }) => {
   // 将 schema 转化为渲染的数据
   const interfaceData = schema2InterfaceData({ config, schema })
-  const str = template(
-    path.resolve(__dirname, '../../templates/interfaces.art'),
-    interfaceData
+  const str = prettier.format(
+    template(
+      path.resolve(__dirname, '../../templates/interfaces.art'),
+      interfaceData
+    ),
+    {
+      semi: false,
+      parser: 'typescript'
+    }
   )
 
   try {

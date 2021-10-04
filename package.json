@@ -31,7 +31,9 @@
     "@types/inquirer": "^8.1.1",
     "@types/module-alias": "^2.0.1",
     "@types/node": "^16.7.10",
+    "@types/prettier": "^2.4.1",
     "copyfiles": "^2.4.1",
+    "prettier": "^2.4.1",
     "rimraf": "^3.0.2"
   },
   "_moduleAliases": {
