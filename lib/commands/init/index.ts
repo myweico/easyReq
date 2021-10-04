@@ -10,8 +10,6 @@ export default {
     // 检测配置文件是否存在
     try {
       const data = fs.readFileSync(Config.configFileName, 'utf-8')
-      console.log('Config file existed: \n')
-      console.log(data)
       // 检测配置文件是否合法
       // 合法的话询问是否采用原配置
       inquirer
@@ -27,7 +25,6 @@ export default {
         .then((answer) => {
           const { wouldUseInitalConfig } = answer
           if (wouldUseInitalConfig) {
-            console.log('User "easyreq to generate files.Gook Luck!��"')
             process.exit(1)
           } else {
             // 询问配置项，写入文件

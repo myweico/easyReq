@@ -18,12 +18,10 @@ export default {
       if (is.httpUrl(swaggerUrl)) {
         const swaggerSchemaRes = await axios.get(swaggerUrl)
         swaggerSchema = swaggerSchemaRes.data
-        console.log('swagger from axios', swaggerSchema)
       } else {
         // 从本地读取
         const swaggerSchemaStr = fs.readFileSync(swaggerUrl, 'utf-8')
         swaggerSchema = JSON.parse(swaggerSchemaStr)
-        console.log('swagger from file: ', swaggerSchema)
       }
 
       generateFile(swaggerSchema, reqConfig)

@@ -1,3 +1,11 @@
-declare namesapce {{ namespace }} {
-	{{set schema = data.schema}}
+{{if description}}// {{description}}
+{{/if}}declare namespace {{ namespace }} {
+	{{each interfaces interfaceData}}{{if interfaceData.description}}/**
+		 * {{interfaceData.description}}
+		 */
+		 {{/if}}{{if interfaceData.type}}type {{interfaceData.name}} = {{interfaceData.type}}{{else if interfaceData.params}}interface {{interfaceData.name}} {
+			{{each interfaceData.params paramsData}}{{paramsData.name}}{{paramsData.required ? '' : '?'}}: {{paramsData.type}}{{if paramsData.description}} /* {{paramsData.description}} */{{/if}}
+			{{/each}}}
+		{{/if}}
+	{{/each}}
 }
