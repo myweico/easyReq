@@ -30,17 +30,22 @@ interface Parameter {
   schema?: BodySchema
 }
 
+interface ResponseRefConfig {
+  $ref: string
+}
+
+interface ResponseMap {
+  default: ResponseRefConfig
+  [status: string]: ResponseRefConfig
+}
+
 interface RequestSchema {
   description?: string
   tags: string[]
   summary: string
   operationId: string
   parameters: Parameter[]
-  responses: {
-    default: {
-      $ref: string
-    }
-  }
+  responses: ResponseMap
 }
 
 interface PathSchema {
@@ -55,17 +60,16 @@ interface Definition {
   'x-go-package'?: string
 }
 
+interface ResponseSchema {
+  description: string
+  schema: BodySchema
+}
+
 interface Schema {
   swagger: string
-  path: Record<string, PathSchema>
+  paths: Record<string, PathSchema>
   definitions: Record<string, Definition>
-  response: Record<
-    string,
-    {
-      description: string
-      schema: BodySchema
-    }
-  >
+  responses: Record<string, ResponseSchema>
 }
 
 interface InterfaceParamsSchema {
