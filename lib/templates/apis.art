@@ -1,5 +1,14 @@
-import request from '../utils/request'
+{{@requestSnippet}}
 
-export function test(options) {
-	return request('url', options)
+{{each requestMethodConfig requestData}}
+{{if requestData.comment}}/**
+ * requestData.comment
+ */{{/if}}
+export function {{requestData.name}}(options: {{@namespace}}.{{requestData.requestInterfaceName}}): Promise<{{@namespace}}.{{requestData.responseInterfaceName}}> {
+	return request({
+		{{if requestData.url}}url: `{{requestData.url}}`,{{/if}}
+		{{if requestData.method}}method: "{{requestData.method}}",{{/if}}
+		data: options
+		})
 }
+{{/each}}

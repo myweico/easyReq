@@ -92,3 +92,28 @@ interface InterfacesSchema {
   description?: string
   interfaces: InterfaceSchema[]
 }
+
+interface CommentSchema {
+  desc?: string
+  example?: string
+  default?: string
+  creator?: string
+  createTime?: number
+  updateTime?: number
+  yapiUrl?: string
+}
+
+interface ApiSchema {
+  comment: CommentSchema
+  name: string
+  method: string
+  requestInterfaceName: string
+  responseInterfaceName: string
+  url: string
+}
+
+interface RequestMethodTemplateSchema {
+  namespace: string
+  requestSnippet: string
+  requestMethodConfig: ApiSchema[]
+}

@@ -4,6 +4,8 @@ export const toCamel = (name: string) => {
   })
 }
 
+const defaultNameSpace = 'API'
+
 export const transformType = (type: string) => {
   const typeMap: Record<string, string> = {
     integer: 'number'
@@ -236,12 +238,46 @@ export const schema2InterfaceData = ({
   const { definitions } = schema
   // interface 由请求的数据、definition 以及 response 生成
   // 1. definition 的声明
-  config.namespace = config.namespace || 'API'
+  config.namespace = config.namespace || defaultNameSpace
   const definitionInterfaces = transformDefinitions(definitions, config)
   const requestInterfaces = transformRequests({ schema, config })
   return {
     namespace: config.namespace,
     interfaces: [...definitionInterfaces, ...requestInterfaces]
+  }
+}
+
+export const schema2RequestMethodTemplateData = ({
+  config,
+  schema
+}: {
+  config: EasyReqConfig
+  schema: Schema
+}): RequestMethodTemplateSchema => {
+  // 每个 path 里面的每个 method 对应一个函数
+  const requestMethodConfigs: ApiSchema[] = []
+  Object.entries(schema.paths).forEach(([pathName, requestConfigMap]) => {
+    Object.entries(requestConfigMap).forEach(([method, requestConfig]) => {
+      // 取出 path 最后一个段
+      const name = toCamel(requestConfig.operationId)
+
+      requestMethodConfigs.push({
+        name: toCamel(name),
+        requestInterfaceName: transformToReqName(name),
+        responseInterfaceName: transformToReqName(name),
+        comment: {
+          desc: requestConfig.description
+        },
+        url: pathName,
+        method: method
+      })
+    })
+  })
+
+  return {
+    namespace: config.namespace || defaultNameSpace,
+    requestSnippet: config.requestSnippet,
+    requestMethodConfig: requestMethodConfigs
   }
 }
 
