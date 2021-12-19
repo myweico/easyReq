@@ -6,6 +6,7 @@ import {
   schema2RequestMethodTemplateData
 } from '@/utils/transform'
 import prettier from 'prettier'
+import { getRequestMethodTemplate } from '@/templates/requestMethodTemplate'
 
 export const generateApisFile = ({
   schema,
@@ -14,11 +15,19 @@ export const generateApisFile = ({
   schema: any
   config: any
 }) => {
-  const scehmaToRequest = schema2RequestMethodTemplateData({ schema, config })
-  console.log('scehmaToRequest', scehmaToRequest)
-  const str = template(
-    path.resolve(__dirname, '../../templates/apis.art'),
-    scehmaToRequest
+  const requestMethodTemplateData = schema2RequestMethodTemplateData({
+    schema,
+    config
+  })
+  const str = prettier.format(
+    getRequestMethodTemplate({
+      requestMethodTemplateData,
+      config
+    }),
+    {
+      semi: false,
+      parser: 'typescript'
+    }
   )
 
   try {
